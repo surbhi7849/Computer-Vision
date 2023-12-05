@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Echoes: Airbnb Edition</title>
+    <style>
+        /* Add some basic styling */
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-gap: 10px; }
+        .image-grid img { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <h1>Visual Echoes: Airbnb Edition</h1>
+    <form id="uploadForm">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Upload Image</button>
+    </form>
+
+    <h2>Similar Images</h2>
+    <div id="results" class="image-grid">
+        <!-- Similar images will be displayed here -->
+    </div>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        const results = document.getElementById('results');
+
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const response = await fetch('/uploadfile/', {
+                method: 'POST',
+                body: formData
+            });
+
+            if(response.ok) {
+                const htmlContent = await response.text();
+                results.innerHTML = htmlContent;
+            } else {
+                console.error('Server error:', response);
+            }
+        };
+    </script>
+</body>
+</html>
