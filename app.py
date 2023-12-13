@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import HTMLResponse
 import uvicorn
 from io import BytesIO
-from your_model_module import find_similar_images, display_images # Import your ML model and functions here
+#from your_model_module import find_similar_images, display_images # Import your ML model and functions here
 
 app = FastAPI()
 
@@ -36,3 +36,5 @@ def read_root():
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+#uvicorn main:app --reload
